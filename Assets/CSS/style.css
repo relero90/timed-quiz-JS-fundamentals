@@ -1,0 +1,97 @@
+/* declares color variables */
+:root {
+  --white: #f9f9f9;
+  --navy: #002b5b;
+  --blue: #4cacbc;
+  --green: #6cc4a1;
+}
+/* sets font family and box sizes */
+* {
+  box-sizing: border-box;
+  font-family: "Roboto Mono", monospace;
+}
+
+body {
+  margin: 0;
+  color: var(--navy);
+  background-color: var(--white);
+  line-height: 1.4rem;
+}
+
+h1 {
+  font-size: 3.4vw;
+}
+
+h2 {
+  font-size: 2.5vw;
+  text-align: center;
+  line-height: 3rem;
+}
+
+h3 {
+  text-align: center;
+  font-size: 2.4vw;
+  font-weight: 700;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--blue);
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+}
+
+#container {
+  padding-top: 6rem;
+  display: flex;
+  justify-content: center;
+}
+
+#question-container {
+  width: 65%;
+}
+
+.btn {
+  border-radius: 3rem;
+  font-size: 3vw;
+  color: var(--green);
+}
+
+#answer-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  padding: 10px;
+  margin: 24px;
+  min-width: 70%;
+  cursor: pointer;
+  font-size: 24px;
+  background-color: var(--navy);
+  color: var(--white);
+}
+
+footer {
+  display: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--blue);
+  color: var(--navy);
+  text-align: center;
+  padding: 1rem;
+}
