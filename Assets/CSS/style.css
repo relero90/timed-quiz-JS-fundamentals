@@ -30,7 +30,7 @@ h2 {
 
 h3 {
   text-align: center;
-  font-size: 2.4vw;
+  font-size: 2vw;
   font-weight: 700;
 }
 
@@ -66,6 +66,10 @@ main {
   justify-content: center;
 }
 
+#start-container {
+  padding-top: 8rem;
+}
+
 #question-container {
   width: 65vw;
 }
@@ -95,4 +99,8 @@ footer {
   color: var(--navy);
   text-align: center;
   padding: 1rem;
+}
+
+.hidden {
+  display: none;
 }
