@@ -16,25 +16,117 @@
   <body>
     <header>
       <h1>JavaScript Fundamentals Quiz</h1>
-      <h3><a src="#">High Scores</a></h3>
+      <div>
+        <h3 id="countdown-display">Timer Countdown</h3>
+        <h3><a src="#">High Scores</a></h3>
+      </div>
     </header>
 
     <main>
+      <!-- Start Screen -->
+      <div id="container">
+        <div id="start-container" class="visible">
+          <h2>Are you ready to test your JavaScript knowledge?</h2>
+          <p>Click below to start.</p>
+          <div id="answer-buttons" class="btn-grid">
+            <button class="btn" id="start">Start</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question #1 -->
       <div id="container">
         <div id="question-container" class="hidden">
           <h2>
             1. Which of the following is an illegal variable name in JavaScript?
           </h2>
           <div id="answer-buttons" class="btn-grid">
-            <button class="btn">dogThots</button>
-            <button class="btn">turtle1</button>
-            <button class="btn">3BlindMice</button>
-            <button class="btn">x</button>
+            <button class="btn" id="incorrect">dogThots</button>
+            <button class="btn" id="incorrect">turtle1</button>
+            <button class="btn" id="correct">3BlindMice</button>
+            <button class="btn" id="incorrect">x</button>
           </div>
         </div>
       </div>
       <div class="score">
-        <span id="right-answer"></span>
+        <span id="user-feedback"></span>
+      </div>
+
+      <!-- Question #2 -->
+      <div id="container">
+        <div id="question-container" class="hidden">
+          <h2>
+            2. Which method can be used to insert one or more elements at any
+            index position in an array?
+          </h2>
+          <div id="answer-buttons" class="btn-grid">
+            <button class="btn" id="incorrect">.unshift()</button>
+            <button class="btn" id="incorrect">.slice()</button>
+            <button class="btn" id="incorrect">.pop()</button>
+            <button class="btn" id="correct">.splice()</button>
+          </div>
+        </div>
+      </div>
+      <div class="score">
+        <span id="user-feedback"></span>
+      </div>
+
+      <!-- Question #3 -->
+      <div id="container">
+        <div id="question-container" class="hidden">
+          <h2>3. Fill in the blank so that the for loop runs 5 times.</h2>
+          <p>for (var i = 0; i <= __; i++) {...}</p>
+          <div id="answer-buttons" class="btn-grid">
+            <button class="btn" id="incorrect">5</button>
+            <button class="btn" id="correct">4</button>
+            <button class="btn" id="incorrect">1</button>
+            <button class="btn" id="incorrect">0</button>
+          </div>
+        </div>
+      </div>
+      <div class="score">
+        <span id="user-feedback"></span>
+      </div>
+
+      <!-- Question #4 -->
+      <div id="container">
+        <div id="question-container" class="hidden">
+          <h2>
+            4. Which method allows you to extract any character from a string?
+          </h2>
+          <div id="answer-buttons" class="btn-grid">
+            <button class="btn" id="correct">charAt()</button>
+            <button class="btn" id="incorrect">indexOf()</button>
+            <button class="btn" id="incorrect">splice()</button>
+            <button class="btn" id="incorrect">extrAt()</button>
+          </div>
+        </div>
+      </div>
+      <div class="score">
+        <span id="user-feedback"></span>
+      </div>
+
+      <!-- Question #5 -->
+      <div id="container">
+        <div id="question-container" class="hidden">
+          <h2>5. Which of the following statements is false?</h2>
+          <div id="answer-buttons" class="btn-grid">
+            <button class="btn" id="incorrect">
+              A method is a function that has a receiver (an object).
+            </button>
+            <button class="btn" id="incorrect">
+              A function is declared on the global object (window).
+            </button>
+            <button class="btn" id="correct">All functions are methods.</button>
+            <button class="btn" id="incorrect">
+              A method can be turned into a function and a function can be
+              turned into a method.
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="score">
+        <span id="user-feedback"></span>
       </div>
     </main>
 
