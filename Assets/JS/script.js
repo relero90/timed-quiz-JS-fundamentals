@@ -10,7 +10,7 @@ var wrgButton3 = document.querySelectorAll("#incorrect-3");
 // User feedback string
 var feedback = document.querySelectorAll("#user-feedback");
 var userInit = document.querySelector("#initials");
-var savButton = document.querySelector("#sav-btn");
+var savButton = document.querySelector("#save");
 var userScore = 0;
 
 // Functions
@@ -107,4 +107,15 @@ wrgButton3.forEach((wayOff, i) => {
       questions[i + 1].setAttribute("class", "visible");
     }
   });
+});
+
+savButton.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  var userInputs = {
+    initials: userInit.value.trim(),
+    score: localStorage.getItem("score"),
+  };
+
+  localStorage.setItem("scoreLog", JSON.stringify(userInputs));
 });
