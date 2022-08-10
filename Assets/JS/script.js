@@ -110,40 +110,47 @@ wrgButton3.forEach((wayOff, i) => {
   });
 });
 
+// When user clicks Save Score button...
 savButton.addEventListener("click", function (event) {
   event.preventDefault();
-
+  // put user inputs into an object
   var userInputs = {
     initials: userInit.value.trim(),
     score: localStorage.getItem("score"),
   };
 
-  localStorage.setItem("scoreLog", JSON.stringify(userInputs));
+  savdScores.push(userInputs);
+
+  // send user inputs as a string to local storage
+  localStorage.setItem("savdScores", JSON.stringify(savdScores));
+
+  // run next function
   pullScoreLog();
 });
 
-// Grabs stored todo information and adds it to the current todo list
+// Grabs stored score & initial information and adds it to the current savdScores array
 function pullScoreLog() {
   // Grabs any items from the scoreLog string that are stored in local storage and changes them into array items in the array scoreBank
-  var scoreBank = JSON.parse(localStorage.getItem("scoreLog"));
+  var scoreBank = JSON.parse(localStorage.getItem("savdScores"));
+  console.log(scoreBank);
   // If there is something in scoreBank (value not equal to null), add that something to the savdScores array.
-  if (scoreBank !== null) {
-    savdScores.push(scoreBank);
-  }
-  // call the renderTodos() function
+  // if (scoreBank !== null) {
+  //   savdScores.push(scoreBank);
+  // }
+  console.log(savdScores);
+  // call the next function
   renderScoreLog();
 }
 
 function renderScoreLog() {
   // For each item in the savdScores array, create a list item equal to the value of that item; append the li to scorBrd
   for (var i = 0; i < savdScores.length; i++) {
-    var scorDispl;
-    scorDispl[i] = savdScores[i];
+    var element = savdScores[i];
+
     var scorRcrd = document.createElement("li");
     // not successfully inserting text content
-    scorRcrd.textContent = scorDispl.value;
-    console.log(li);
+    scorRcrd.textContent = element.initials + "--" + element.score;
     scorRcrd.setAttribute("data-index", i);
-    scorBrd.appendChild(li);
+    scorBrd.appendChild(scorRcrd);
   }
 }
