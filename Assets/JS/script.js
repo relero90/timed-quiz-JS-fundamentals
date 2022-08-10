@@ -4,10 +4,13 @@ var startScrn = document.querySelector("#start-container");
 var questions = document.querySelectorAll("#question-container");
 // Arrays of correct/incorrect buttons
 var rigButton = document.querySelectorAll("#correct");
-var wrgButton = document.querySelectorAll("#incorrect");
+var wrgButton1 = document.querySelectorAll("#incorrect-1");
+var wrgButton2 = document.querySelectorAll("#incorrect-2");
+var wrgButton3 = document.querySelectorAll("#incorrect-3");
 // User feedback string
 var feedback = document.querySelectorAll("#user-feedback");
-
+var userInit = document.querySelector("#initials");
+var savButton = document.querySelector("#sav-btn");
 var userScore = 0;
 
 // Functions
@@ -17,7 +20,6 @@ function keepTime() {}
 function timeDown() {}
 
 // Event Listeners
-// < ---------------------------------------- >
 // When user clicks on the start button
 start.addEventListener("click", function () {
   // disappear start screen & show question 1
@@ -26,72 +28,83 @@ start.addEventListener("click", function () {
   // start timer function
   keepTime();
 });
-
 // When user clicks on a correct answer
-// For each button in the correct array - run handleClick function
 rigButton.forEach((correct, i) => {
-  correct.addEventListener("click", function handleClick(event) {
-    // add points to value of userScore
+  correct.addEventListener("click", function handleClick() {
+    // add points to value of userScore & stores value locally
     userScore = userScore + 27;
     localStorage.setItem("score", userScore);
-    // alert user
-    // give new feedback
-    // If this is the first question,
+    // alert user (any question but last)
     if (i < rigButton.length - 1) {
       feedback[i + 1].textContent =
         "Correct! Your current score is " + userScore + ".";
-      correct.setAttribute(
-        "style",
-        "background-color: var(--green); color: var(--navy)"
-      );
     }
     // If this is the last question,
     else {
-      feedback[i].textContent =
+      // display textContent feedback message
+      feedback[i + 1].textContent =
         "Correct! Your final score is " + userScore + ".";
-      correct.setAttribute(
-        "style",
-        "background-color: var(--green); color: var(--navy)"
-      );
-      // display score & initial recorder
     }
-
-    feedback[i].textContent =
-      "Correct! Your current score is " + userScore + ".";
-    correct.setAttribute(
-      "style",
-      "background-color: var(--green); color: var(--navy)"
-    );
-
     // Disappear current question & display next question
     questions[i].setAttribute("class", "hidden");
     questions[i + 1].setAttribute("class", "visible");
-    // feedback[i].textContent = "";
   });
 });
-
 // When user clicks on an incorrect answer
-wrgButton.forEach((incorrect, i) => {
-  incorrect.addEventListener("click", function handleClick(event) {
-    // alert user
-    feedback.forEach((feedback) => {
-      // JS returning error feedback.textContent
-      feedback = feedback.textContent(
-        "Correct! Your current score is " + userScore
-      );
-      console.log(userScore);
-      correct.setAttribute(
-        "style",
-        "background-color: var(--white); color: var(--green)"
-      );
-      // (function??) remove question from display & display next question
-    });
+wrgButton1.forEach((incorrect, i) => {
+  incorrect.addEventListener("click", function handleClick() {
+    // alert user (any question but last)
+    if (i < wrgButton1.length - 1) {
+      feedback[i + 1].textContent = "Oops! Time deducted!";
+      // Deduct time from timer
+
+      // Disappear current question & display next question
+      questions[i].setAttribute("class", "hidden");
+      questions[i + 1].setAttribute("class", "visible");
+    } else {
+      feedback[i + 1].textContent =
+        "Oops! Your final score is " + userScore + ".";
+      // Disappear current question & display next question
+      questions[i].setAttribute("class", "hidden");
+      questions[i + 1].setAttribute("class", "visible");
+    }
   });
 });
+wrgButton2.forEach((wrong, i) => {
+  wrong.addEventListener("click", function handleClick() {
+    // alert user (any question but last)
+    if (i < wrgButton2.length - 1) {
+      feedback[i + 1].textContent = "Oops! Time deducted!";
+      // Deduct time from timer
 
-// incorrect.addEventListener("click", function () {
-//   // deduct time from the timer
-//   // alert user
-//   feedback.textContent("Oops! That's not quite it. Where does the time go?");
-//   // reveal correct answer
-// });
+      // Disappear current question & display next question
+      questions[i].setAttribute("class", "hidden");
+      questions[i + 1].setAttribute("class", "visible");
+    } else {
+      feedback[i + 1].textContent =
+        "Oops! Your final score is " + userScore + ".";
+      // Disappear current question & display next question
+      questions[i].setAttribute("class", "hidden");
+      questions[i + 1].setAttribute("class", "visible");
+    }
+  });
+});
+wrgButton3.forEach((wayOff, i) => {
+  wayOff.addEventListener("click", function handleClick() {
+    // alert user (any question but last)
+    if (i < wrgButton3.length - 1) {
+      feedback[i + 1].textContent = "Oops! Time deducted!";
+      // Deduct time from timer
+
+      // Disappear current question & display next question
+      questions[i].setAttribute("class", "hidden");
+      questions[i + 1].setAttribute("class", "visible");
+    } else {
+      feedback[i + 1].textContent =
+        "Oops! Your final score is " + userScore + ".";
+      // Disappear current question & display next question
+      questions[i].setAttribute("class", "hidden");
+      questions[i + 1].setAttribute("class", "visible");
+    }
+  });
+});

@@ -25,7 +25,7 @@ h1 {
 h2 {
   font-size: 2.5vw;
   text-align: center;
-  line-height: 3rem;
+  line-height: 2rem;
 }
 
 h3 {
@@ -57,7 +57,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 92vh;
+  min-height: 100vh;
 }
 
 #container {
@@ -71,14 +71,14 @@ main {
 }
 
 #question-container {
-  width: 65vw;
+  width: 60vw;
 }
 
 .btn {
   border-radius: 3rem;
-  font-size: 3vw;
+  font-size: 2.6vw;
   color: var(--green);
-  padding: 10px;
+  padding: 5px;
   margin: 24px;
   min-width: 70%;
   cursor: pointer;
@@ -94,11 +94,15 @@ main {
   text-align: center;
 }
 
-#score-container {
+.card {
+  border: var(--navy) 5px solid;
+  padding: 20px;
+}
+
+.input-group {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 65vw;
 }
 
 footer {
@@ -112,11 +116,11 @@ footer {
   padding: 1rem;
 }
 
-/* .hidden {
+.hidden {
   display: none;
 }
 
 .visible {
   position: fixed;
   top: 8rem;
-} */
+}
