@@ -90,6 +90,17 @@ main {
   flex-direction: column;
 }
 
+.score {
+  text-align: center;
+}
+
+#score-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 65vw;
+}
+
 footer {
   display: fixed;
   left: 0;
@@ -101,6 +112,11 @@ footer {
   padding: 1rem;
 }
 
-.hidden {
+/* .hidden {
   display: none;
 }
+
+.visible {
+  position: fixed;
+  top: 8rem;
+} */
