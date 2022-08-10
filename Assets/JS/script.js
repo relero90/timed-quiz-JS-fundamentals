@@ -12,7 +12,8 @@ var feedback = document.querySelectorAll("#user-feedback");
 var userInit = document.querySelector("#initials");
 var savButton = document.querySelector("#save");
 var userScore = 0;
-
+var savdScores = [];
+var scorBrd = document.querySelector("#score-board");
 // Functions
 // Timer Function - display a timer and count down
 function keepTime() {}
@@ -118,4 +119,31 @@ savButton.addEventListener("click", function (event) {
   };
 
   localStorage.setItem("scoreLog", JSON.stringify(userInputs));
+  pullScoreLog();
 });
+
+// Grabs stored todo information and adds it to the current todo list
+function pullScoreLog() {
+  // Grabs any items from the scoreLog string that are stored in local storage and changes them into array items in the array scoreBank
+  var scoreBank = JSON.parse(localStorage.getItem("scoreLog"));
+  // If there is something in scoreBank (value not equal to null), add that something to the savdScores array.
+  if (scoreBank !== null) {
+    savdScores.push(scoreBank);
+  }
+  // call the renderTodos() function
+  renderScoreLog();
+}
+
+function renderScoreLog() {
+  // For each item in the savdScores array, create a list item equal to the value of that item; append the li to scorBrd
+  for (var i = 0; i < savdScores.length; i++) {
+    var scorDispl;
+    scorDispl[i] = savdScores[i];
+    var scorRcrd = document.createElement("li");
+    // not successfully inserting text content
+    scorRcrd.textContent = scorDispl.value;
+    console.log(li);
+    scorRcrd.setAttribute("data-index", i);
+    scorBrd.appendChild(li);
+  }
+}

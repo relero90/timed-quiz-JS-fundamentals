@@ -105,6 +105,12 @@ main {
   align-items: center;
 }
 
+#score-board {
+  font-size: 1.5rem;
+  color: var(--navy);
+  text-align: center;
+}
+
 footer {
   display: fixed;
   left: 0;
