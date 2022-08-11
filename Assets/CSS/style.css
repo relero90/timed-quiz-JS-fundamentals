@@ -5,7 +5,7 @@
   --blue: #4cacbc;
   --green: #6cc4a1;
 }
-/* sets font family and box sizes */
+
 * {
   box-sizing: border-box;
   font-family: "Roboto Mono", monospace;
