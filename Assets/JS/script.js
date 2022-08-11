@@ -1,5 +1,6 @@
 // Variable Declarations
 var startBtn = document.querySelector("#start");
+var timeLeft = 20;
 var rtnStartBtn = document.querySelector("#rtn-start");
 var saveBtn = document.querySelector("#save");
 var timerEl = document.querySelector("#countdown-display");
@@ -61,7 +62,6 @@ function returnToStart() {
 // Timer Function - display a timer and count down
 
 function keepTime() {
-  var timeLeft = 20;
   // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
   var timeInterval = setInterval(function () {
     timeLeft--;
@@ -125,7 +125,7 @@ wrongBtn1.forEach((incorrect, i) => {
     if (i < wrongBtn1.length - 1) {
       feedback[i + 1].textContent = "Oops! Time deducted!";
       // Deduct time from timer
-
+      timeDown();
       // Disappear current question & display next question
       questions[i].setAttribute("class", "hidden");
       questions[i + 1].setAttribute("class", "visible");
@@ -144,7 +144,7 @@ wrongBtn2.forEach((wrong, i) => {
     if (i < wrongBtn2.length - 1) {
       feedback[i + 1].textContent = "Oops! Time deducted!";
       // Deduct time from timer
-
+      timeDown();
       // Disappear current question & display next question
       questions[i].setAttribute("class", "hidden");
       questions[i + 1].setAttribute("class", "visible");
@@ -163,7 +163,7 @@ wrongBtn3.forEach((wayOff, i) => {
     if (i < wrongBtn3.length - 1) {
       feedback[i + 1].textContent = "Oops! Time deducted!";
       // Deduct time from timer
-
+      timeDown();
       // Disappear current question & display next question
       questions[i].setAttribute("class", "hidden");
       questions[i + 1].setAttribute("class", "visible");
