@@ -21,8 +21,10 @@ var scoreBoardEl = document.querySelector("#score-board");
 // Functions
 // to always start by pulling local storage memory into savedScores array
 function setSavedScores() {
-  renderScoreLog();
-  console.log(savedScores);
+  if (JSON.parse(localStorage.getItem("storedDataString")) !== null) {
+    renderScoreLog();
+    console.log(savedScores);
+  }
 }
 setSavedScores();
 
