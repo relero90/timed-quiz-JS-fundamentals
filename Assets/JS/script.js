@@ -75,7 +75,7 @@ function keepTime() {
     timeLeft--;
     timerEl.textContent = "Time Left: " + timeLeft + " sec";
     // exit condition
-    if (timeLeft === 0 || timeLeft <= 0) {
+    if (timeLeft <= 0) {
       clearInterval(timeInterval);
       // jump to end screen
       startScrn.setAttribute("class", "hidden");

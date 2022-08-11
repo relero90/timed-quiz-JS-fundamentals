@@ -85,6 +85,11 @@ main {
   cursor: pointer;
   background-color: var(--navy);
 }
+.btn:hover {
+  color: var(--navy);
+  background-color: var(--green);
+  border-color: var(--green);
+}
 
 .btn-small {
   border-radius: 3rem;
@@ -96,6 +101,12 @@ main {
   min-width: 20%;
   cursor: pointer;
   background-color: var(--navy);
+}
+
+.btn-small:hover {
+  color: var(--navy);
+  background-color: var(--green);
+  border-color: var(--green);
 }
 
 #answer-buttons {
