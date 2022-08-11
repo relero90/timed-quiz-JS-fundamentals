@@ -1,20 +1,62 @@
 // Variable Declarations
-var start = document.querySelector("#start");
+var startBtn = document.querySelector("#start");
+var rtnStartBtn = document.querySelector("#rtn-start");
+var saveBtn = document.querySelector("#save");
 var startScrn = document.querySelector("#start-container");
 var questions = document.querySelectorAll("#question-container");
 // Arrays of correct/incorrect buttons
-var rigButton = document.querySelectorAll("#correct");
-var wrgButton1 = document.querySelectorAll("#incorrect-1");
-var wrgButton2 = document.querySelectorAll("#incorrect-2");
-var wrgButton3 = document.querySelectorAll("#incorrect-3");
-// User feedback string
+var rightBtn = document.querySelectorAll("#correct");
+var wrongBtn1 = document.querySelectorAll("#incorrect-1");
+var wrongBtn2 = document.querySelectorAll("#incorrect-2");
+var wrongBtn3 = document.querySelectorAll("#incorrect-3");
 var feedback = document.querySelectorAll("#user-feedback");
-var userInit = document.querySelector("#initials");
-var savButton = document.querySelector("#save");
+// User information gathering & storage
+var userInitials = document.querySelector("#initials");
 var userScore = 0;
-var savdScores = [];
-var scorBrd = document.querySelector("#score-board");
+var savedScores = [];
+var scoreBoardEl = document.querySelector("#score-board");
+
 // Functions
+// to always start by pulling local storage memory into savedScores array
+function setSavedScores() {
+  renderScoreLog();
+  console.log(savedScores);
+}
+setSavedScores();
+
+function captureUserInputs() {
+  var input1 = userInitials.value.trim();
+  var input2 = localStorage.getItem("score");
+  var scoreRecord = input1 + " -- " + input2;
+  savedScores.push(scoreRecord);
+  // console.log(savedScores);
+
+  var storedStringInput = JSON.stringify(savedScores);
+  localStorage.setItem("storedDataString", storedStringInput);
+}
+// Grabs stored score & initial information and adds it to the current savedScores array
+function renderScoreLog() {
+  // Grabs items from the "storedDataString" that are stored in local storage and changes them back into object items in the array savedScores
+  savedScores = JSON.parse(localStorage.getItem("storedDataString"));
+  // For each item in the savedScores array, create a list item equal to the value of that item; append the li to scoreBoardEl
+  for (var i = 0; i < savedScores.length; i++) {
+    // troubleshoot -
+    // array duplicates old entries when adding new ones (first submit results in 1 <li>, next one 2, then 3...)
+    var pulledScore = savedScores[i];
+    var printedScore = document.createElement("li");
+    printedScore.textContent = pulledScore;
+    printedScore.setAttribute("data-index", i);
+    scoreBoardEl.appendChild(printedScore);
+  }
+}
+// Resets game without impacting scores stored locally
+function returnToStart() {
+  userScore = 0;
+  $('input[type="text"]').val("");
+  startScrn.setAttribute("class", "visible");
+  questions[questions.length - 1].setAttribute("class", "hidden");
+  renderScoreLog();
+}
 // Timer Function - display a timer and count down
 function keepTime() {}
 // Timer Function - remove time when the user answers incorrectly
@@ -22,7 +64,7 @@ function timeDown() {}
 
 // Event Listeners
 // When user clicks on the start button
-start.addEventListener("click", function () {
+startBtn.addEventListener("click", function () {
   // disappear start screen & show question 1
   startScrn.setAttribute("class", "hidden");
   questions[0].setAttribute("class", "visible");
@@ -30,13 +72,13 @@ start.addEventListener("click", function () {
   keepTime();
 });
 // When user clicks on a correct answer
-rigButton.forEach((correct, i) => {
+rightBtn.forEach((correct, i) => {
   correct.addEventListener("click", function handleClick() {
     // add points to value of userScore & stores value locally
     userScore = userScore + 27;
     localStorage.setItem("score", userScore);
     // alert user (any question but last)
-    if (i < rigButton.length - 1) {
+    if (i < rightBtn.length - 1) {
       feedback[i + 1].textContent =
         "Correct! Your current score is " + userScore + ".";
     }
@@ -52,10 +94,10 @@ rigButton.forEach((correct, i) => {
   });
 });
 // When user clicks on an incorrect answer
-wrgButton1.forEach((incorrect, i) => {
+wrongBtn1.forEach((incorrect, i) => {
   incorrect.addEventListener("click", function handleClick() {
     // alert user (any question but last)
-    if (i < wrgButton1.length - 1) {
+    if (i < wrongBtn1.length - 1) {
       feedback[i + 1].textContent = "Oops! Time deducted!";
       // Deduct time from timer
 
@@ -71,10 +113,10 @@ wrgButton1.forEach((incorrect, i) => {
     }
   });
 });
-wrgButton2.forEach((wrong, i) => {
+wrongBtn2.forEach((wrong, i) => {
   wrong.addEventListener("click", function handleClick() {
     // alert user (any question but last)
-    if (i < wrgButton2.length - 1) {
+    if (i < wrongBtn2.length - 1) {
       feedback[i + 1].textContent = "Oops! Time deducted!";
       // Deduct time from timer
 
@@ -90,10 +132,10 @@ wrgButton2.forEach((wrong, i) => {
     }
   });
 });
-wrgButton3.forEach((wayOff, i) => {
+wrongBtn3.forEach((wayOff, i) => {
   wayOff.addEventListener("click", function handleClick() {
     // alert user (any question but last)
-    if (i < wrgButton3.length - 1) {
+    if (i < wrongBtn3.length - 1) {
       feedback[i + 1].textContent = "Oops! Time deducted!";
       // Deduct time from timer
 
@@ -111,46 +153,15 @@ wrgButton3.forEach((wayOff, i) => {
 });
 
 // When user clicks Save Score button...
-savButton.addEventListener("click", function (event) {
+saveBtn.addEventListener("click", function (event) {
   event.preventDefault();
-  // put user inputs into an object
-  var userInputs = {
-    initials: userInit.value.trim(),
-    score: localStorage.getItem("score"),
-  };
+  // captures user inputs into an object, stringifies them, and stores in local storage
+  captureUserInputs();
 
-  savdScores.push(userInputs);
-
-  // send user inputs as a string to local storage
-  localStorage.setItem("savdScores", JSON.stringify(savdScores));
-
-  // run next function
-  pullScoreLog();
+  renderScoreLog();
+  // need a different function? - print only the one user addition OR replace existing <lis> with new ones
 });
 
-// Grabs stored score & initial information and adds it to the current savdScores array
-function pullScoreLog() {
-  // Grabs any items from the scoreLog string that are stored in local storage and changes them into array items in the array scoreBank
-  var scoreBank = JSON.parse(localStorage.getItem("savdScores"));
-  console.log(scoreBank);
-  // If there is something in scoreBank (value not equal to null), add that something to the savdScores array.
-  // if (scoreBank !== null) {
-  //   savdScores.push(scoreBank);
-  // }
-  console.log(savdScores);
-  // call the next function
-  renderScoreLog();
-}
-
-function renderScoreLog() {
-  // For each item in the savdScores array, create a list item equal to the value of that item; append the li to scorBrd
-  for (var i = 0; i < savdScores.length; i++) {
-    var element = savdScores[i];
-
-    var scorRcrd = document.createElement("li");
-    // not successfully inserting text content
-    scorRcrd.textContent = element.initials + "--" + element.score;
-    scorRcrd.setAttribute("data-index", i);
-    scorBrd.appendChild(scorRcrd);
-  }
-}
+rtnStartBtn.addEventListener("click", function () {
+  returnToStart();
+});
