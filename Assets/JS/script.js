@@ -75,10 +75,9 @@ function keepTime() {
       for (var i = 0; i < questions.length - 1; i++) {
         questions[i].setAttribute("class", "hidden");
       }
-
-      // // display special message
-      // feedback[feedback.length - 1].textContent =
-      //   "Time is up! Your final score is " + userScore + ".";
+      // display special message
+      feedback[feedback.length - 1].textContent =
+        "Time is up! Your final score is " + userScore + ".";
     }
   }, 1000);
 }
