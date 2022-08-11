@@ -130,3 +130,29 @@ footer {
   position: fixed;
   top: 8rem;
 }
+
+/* @media only screen and (max-width: 1000px) {
+  #question-container {
+    width: 60vw;
+  }
+
+  .btn {
+    border-radius: 3rem;
+    font-size: 2vw;
+    color: var(--green);
+    padding: 5px;
+    margin: 24px;
+    min-width: 20%;
+    cursor: pointer;
+    background-color: var(--navy);
+  }
+
+  #answer-buttons {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .score {
+    text-align: center;
+  }
+} */

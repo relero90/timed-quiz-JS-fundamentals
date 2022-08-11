@@ -2,6 +2,7 @@
 var startBtn = document.querySelector("#start");
 var rtnStartBtn = document.querySelector("#rtn-start");
 var saveBtn = document.querySelector("#save");
+var timerEl = document.querySelector("#countdown-display");
 var startScrn = document.querySelector("#start-container");
 var questions = document.querySelectorAll("#question-container");
 // Arrays of correct/incorrect buttons
@@ -58,9 +59,33 @@ function returnToStart() {
   renderScoreLog();
 }
 // Timer Function - display a timer and count down
-function keepTime() {}
+
+function keepTime() {
+  var timeLeft = 20;
+  // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+  var timeInterval = setInterval(function () {
+    timeLeft--;
+    timerEl.textContent = "Time Left: " + timeLeft + " sec";
+    // exit condition
+    if (timeLeft === 0) {
+      clearInterval(timeInterval);
+      // jump to end screen
+      // startScrn.setAttribute("class", "hidden");
+      // for (var i = 0; i < questions.length - 1; i++) {
+      //   questions[i].setAttribute("class", "hidden");
+      // }
+      // questions[questions.length - 1].setAttribute("class", "visible");
+      // // display special message
+      // feedback[feedback.length - 1].textContent =
+      //   "Time is up! Your final score is " + userScore + ".";
+    }
+  }, 1000);
+}
+
 // Timer Function - remove time when the user answers incorrectly
-function timeDown() {}
+function timeDown() {
+  timeLeft = timeLeft - 3;
+}
 
 // Event Listeners
 // When user clicks on the start button
