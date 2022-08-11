@@ -17,6 +17,7 @@ var userInitials = document.querySelector("#initials");
 var userScore = 0;
 var savedScores = [];
 var scoreBoardEl = document.querySelector("#score-board");
+var timeInterval;
 
 // Functions
 // to always start by pulling local storage memory into savedScores array
@@ -40,6 +41,7 @@ function captureUserInputs() {
 }
 // Grabs stored score & initial information and adds it to the current savedScores array
 function renderScoreLog() {
+  scoreBoardEl.textContent = "";
   // Grabs items from the "storedDataString" that are stored in local storage and changes them back into object items in the array savedScores
   savedScores = JSON.parse(localStorage.getItem("storedDataString"));
   // For each item in the savedScores array, create a list item equal to the value of that item; append the li to scoreBoardEl
@@ -55,7 +57,10 @@ function renderScoreLog() {
 }
 // Resets game without impacting scores stored locally
 function returnToStart() {
+  clearInterval(timeInterval);
   userScore = 0;
+  timeLeft = 20;
+  timerEl.textContent = "Time Left: " + timeLeft + " sec";
   $('input[type="text"]').val("");
   startScrn.setAttribute("class", "visible");
   questions[questions.length - 1].setAttribute("class", "hidden");
@@ -64,12 +69,12 @@ function returnToStart() {
 // Timer Function - display a timer and count down
 
 function keepTime() {
-  // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-  var timeInterval = setInterval(function () {
+  // setInterval()calls a function to be executed every 1000 milliseconds
+  timeInterval = setInterval(function () {
     timeLeft--;
     timerEl.textContent = "Time Left: " + timeLeft + " sec";
     // exit condition
-    if (timeLeft === 0) {
+    if (timeLeft === 0 || timeLeft <= 0) {
       clearInterval(timeInterval);
       // jump to end screen
       startScrn.setAttribute("class", "hidden");
@@ -77,16 +82,31 @@ function keepTime() {
       for (var i = 0; i < questions.length - 1; i++) {
         questions[i].setAttribute("class", "hidden");
       }
-      // display special message
+      // display time's up message
       feedback[feedback.length - 1].textContent =
         "Time is up! Your final score is " + userScore + ".";
+    } else if (
+      // if user reaches the end before timeLeft=0
+      questions[questions.length - 1].classList.contains("visible") === true
+    ) {
+      // multiply timeLeft by 5 and add it to userScore
+      userScore = userScore + timeLeft * 5;
+      localStorage.setItem("score", userScore);
+      clearInterval(timeInterval);
+      // display the bonus points message
+      feedback[feedback.length - 1].textContent =
+        "Extra time bonus! Your final score is " + userScore + ".";
     }
   }, 1000);
 }
 
 // Timer Function - remove time when the user answers incorrectly
 function timeDown() {
-  timeLeft = timeLeft - 3;
+  if (timeLeft < 3) {
+    timeLeft = 0;
+  } else {
+    timeLeft = timeLeft - 3;
+  }
 }
 
 // Event Listeners
@@ -123,6 +143,9 @@ rightBtn.forEach((correct, i) => {
 // When user clicks on an incorrect answer
 wrongBtn1.forEach((incorrect, i) => {
   incorrect.addEventListener("click", function handleClick() {
+    // Save userScore to local Storage without changing its value
+    userScore = userScore;
+    localStorage.setItem("score", userScore);
     // alert user (any question but last)
     if (i < wrongBtn1.length - 1) {
       feedback[i + 1].textContent = "Oops! Time deducted!";
@@ -142,6 +165,9 @@ wrongBtn1.forEach((incorrect, i) => {
 });
 wrongBtn2.forEach((wrong, i) => {
   wrong.addEventListener("click", function handleClick() {
+    // Save userScore to local Storage without changing its value
+    userScore = userScore;
+    localStorage.setItem("score", userScore);
     // alert user (any question but last)
     if (i < wrongBtn2.length - 1) {
       feedback[i + 1].textContent = "Oops! Time deducted!";
@@ -161,6 +187,9 @@ wrongBtn2.forEach((wrong, i) => {
 });
 wrongBtn3.forEach((wayOff, i) => {
   wayOff.addEventListener("click", function handleClick() {
+    // Save userScore to local Storage without changing its value
+    userScore = userScore;
+    localStorage.setItem("score", userScore);
     // alert user (any question but last)
     if (i < wrongBtn3.length - 1) {
       feedback[i + 1].textContent = "Oops! Time deducted!";
