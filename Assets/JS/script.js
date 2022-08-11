@@ -1,5 +1,6 @@
 // Variable Declarations
 var startBtn = document.querySelector("#start");
+var highScoreBtn = document.querySelector("#highscore-btn");
 var timeLeft = 20;
 var rtnStartBtn = document.querySelector("#rtn-start");
 var saveBtn = document.querySelector("#save");
@@ -208,6 +209,23 @@ wrongBtn3.forEach((wayOff, i) => {
   });
 });
 
+// when user clicks view high score button
+highScoreBtn.addEventListener("click", function () {
+  // reset timer, userScore, and text fields on scoreboard
+  clearInterval(timeInterval);
+  userScore = 0;
+  timeLeft = 20;
+  timerEl.textContent = "Time Left: " + timeLeft + " sec";
+  $('input[type="text"]').val("");
+  // switch display to score board
+  startScrn.setAttribute("class", "hidden");
+  questions[questions.length - 1].setAttribute("class", "visible");
+  for (var i = 0; i < questions.length - 1; i++) {
+    questions[i].setAttribute("class", "hidden");
+  }
+  // clear feedback display
+  feedback[feedback.length - 1].textContent = "";
+});
 // When user clicks Save Score button...
 saveBtn.addEventListener("click", function (event) {
   event.preventDefault();

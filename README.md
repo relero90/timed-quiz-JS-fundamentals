@@ -10,4 +10,10 @@ When the time runs out or the user reaches the end, a scoreboard is presented di
 
 ## Screenshots
 
+!["An image of the application's start screen"](./Assets/images/start-screen.png)
+
+!["An image of an example question"](./Assets/images/question-example.png)
+
+!["An image of the application's end screen with score board"](./Assets/images/score-board.png)
+
 ## Deployed Application Link
