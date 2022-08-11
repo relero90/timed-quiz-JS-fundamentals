@@ -17,3 +17,5 @@ When the time runs out or the user reaches the end, a scoreboard is presented di
 !["An image of the application's end screen with score board"](./Assets/images/score-board.png)
 
 ## Deployed Application Link
+
+https://relero90.github.io/timed-quiz-JS-fundamentals/
