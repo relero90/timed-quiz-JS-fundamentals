@@ -70,11 +70,12 @@ function keepTime() {
     if (timeLeft === 0) {
       clearInterval(timeInterval);
       // jump to end screen
-      // startScrn.setAttribute("class", "hidden");
-      // for (var i = 0; i < questions.length - 1; i++) {
-      //   questions[i].setAttribute("class", "hidden");
-      // }
-      // questions[questions.length - 1].setAttribute("class", "visible");
+      startScrn.setAttribute("class", "hidden");
+      questions[questions.length - 1].setAttribute("class", "visible");
+      for (var i = 0; i < questions.length - 1; i++) {
+        questions[i].setAttribute("class", "hidden");
+      }
+
       // // display special message
       // feedback[feedback.length - 1].textContent =
       //   "Time is up! Your final score is " + userScore + ".";
